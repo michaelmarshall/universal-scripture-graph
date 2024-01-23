@@ -1,0 +1,30 @@
+# This file is auto generated from it's template,
+# see citusdata/tools/packaging_automation/templates/docker/latest/docker-compose.tmpl.yml.
+version: "3"
+
+services:
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: asdfasdf
+      POSTGRES_DB: usg
+    ports:
+      - "5437:5432"
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@biblionexus.org
+      PGADMIN_DEFAULT_PASSWORD: asdfasdf
+    ports:
+      - 8109:80
+    depends_on:
+      - postgres
+    volumes:
+      - ./pgAdmin-data:/var/lib/pgadmin
+
